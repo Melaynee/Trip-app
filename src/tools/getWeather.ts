@@ -66,6 +66,8 @@ interface IWeatherProps {
   date2: string;
 }
 
+const API_KEY = import.meta.env.VITE_REACT_APP_VISUAL_CROSSING_API_KEY;
+
 const getWeather = async ({
   location,
   date1,
@@ -73,7 +75,7 @@ const getWeather = async ({
 }: IWeatherProps): Promise<IWeatherData> => {
   try {
     const { data } = await axios.get(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date1}/${date2}?key=TV4BXKE65Y662AWZMBVKEF7QS`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date1}/${date2}?key=${API_KEY}`
     );
     return data;
   } catch (error) {
