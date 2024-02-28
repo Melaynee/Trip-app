@@ -278,6 +278,7 @@ body {
 
 .day-cards-grid {
   width: 760px;
+  overflow: scroll;
 }
 
 .loading-skeleton {
