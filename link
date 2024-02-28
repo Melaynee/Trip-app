@@ -1,0 +1,3 @@
+https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=TV4BXKE65Y662AWZMBVKEF7QS
+
+https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/%5bcity%5d/today?unitGroup=metric&amp;include=days&amp;key=YOUR_API_KEY&amp;contentType=json
