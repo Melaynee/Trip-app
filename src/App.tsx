@@ -3,6 +3,7 @@ import Main from "./components/Main";
 import TodaysWeatherWidget from "./components/TodaysWeatherWidget";
 import getWeather, { IWeatherData } from "./tools/getWeather";
 import LoadingSkeleton from "./components/LoadingSkeleton";
+import { AxiosError } from "axios";
 
 export interface Trip {
   city: string;
@@ -54,15 +55,17 @@ const App: React.FC = () => {
         setLoading(false);
         setError(null);
       } catch (error) {
-        console.error("Error fetching weather data:", error);
-        setError(
-          "Failed to fetch weather data. Please try again later." +
-            " " +
-            error.response.status +
-            " " +
-            error.response.data
-        );
-        setLoading(false);
+        if (error instanceof AxiosError && error.response) {
+          console.error("Error fetching weather data:", error);
+          setError(
+            "Failed to fetch weather data. Please try again later." +
+              (error.response.status ? ` ${error.response.status}` : "") +
+              (error.response.data ? ` ${error.response.data}` : "")
+          );
+        } else {
+          console.error("Unknown error:", error);
+          setError("An unknown error occurred. Please try again later.");
+        }
       }
     };
 
