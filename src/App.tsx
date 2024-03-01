@@ -55,7 +55,13 @@ const App: React.FC = () => {
         setError(null);
       } catch (error) {
         console.error("Error fetching weather data:", error);
-        setError("Failed to fetch weather data. Please try again later.");
+        setError(
+          "Failed to fetch weather data. Please try again later." +
+            " " +
+            error.response.status +
+            " " +
+            error.response.data
+        );
         setLoading(false);
       }
     };
@@ -80,7 +86,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       {loading && <LoadingSkeleton />}
-      {error && <p>{error}</p>}
+      {error && <p style={{ maxWidth: "500px", margin: "0 auto" }}>{error}</p>}
       {weatherData && (
         <>
           <div className="main">

@@ -18,6 +18,10 @@ const Modal = ({
   const [lastDay, setLastDay] = useState("");
   const [error, setError] = useState("");
 
+  const currentDate = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(currentDate.getDate() + 14);
+
   const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCity(e.target.value);
     setError("");
@@ -90,7 +94,8 @@ const Modal = ({
             id="startDate"
             value={firstDay}
             required
-            min={new Date().toISOString().split("T")[0]}
+            min={currentDate.toISOString().split("T")[0]}
+            max={maxDate.toISOString().split("T")[0]}
             onChange={(e) => setFirstDay(e.target.value)}
           />
           <label htmlFor="endDate">
@@ -101,8 +106,10 @@ const Modal = ({
             id="endDate"
             value={lastDay}
             required
-            min={new Date().toISOString().split("T")[0]}
+            min={currentDate.toISOString().split("T")[0]}
+            max={maxDate.toISOString().split("T")[0]}
             onChange={(e) => setLastDay(e.target.value)}
+            disabled={!firstDay}
           />
           {error && <p className="error-message">{error}</p>}
         </form>
